@@ -11,12 +11,14 @@ using namespace std;
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 string getnames();
 double getgrades();
 char getscore(double[],int);
 void displayresults(double [],int, char[],string []);
 int choose();
+double getlowest(double[][4], int, int);
 
 const int numofstudents = 5;
 const int numofgrades = 4;
@@ -39,7 +41,8 @@ int main() //
 				grades[count][index] = getgrades();
 				averages[count] += grades[count][index]; // calculate averages
 			}
-			averages[count] = averages[count] / numofgrades;
+			int number = getlowest(grades,numofstudents,count); //finds the lowest grade
+			averages[count] = (averages[count] - number) / (numofgrades - 1); //subtracts the lowest grade for the total and "1" from the number of grades.
 		}
 		for (int count = 0; count < numofstudents; count++) // gets the letter grade
 		{
@@ -97,7 +100,7 @@ void displayresults(double averages[],int students,char grades[],string names[])
 	cout << "******************************************" << endl;
 	for (int count = 0; count < students;count++)
 	{
-		cout << averages[count] <<"\t"<< grades[count] << "\t" << names[count] << endl;
+		cout <<fixed<<setprecision(2)<< averages[count] <<"\t"<< grades[count] << "\t" << names[count] << endl;
 	}
 }
 int choose() //makes the program repeatable
@@ -111,4 +114,17 @@ int choose() //makes the program repeatable
 		cin >> choice;
 	}
 	return choice;
+}
+double getlowest(double array[][4],int num, int stud) //drops the lowest grade
+{
+	double lowest;
+	lowest = array[stud][0];
+	for (int count = 1;count < 4;count++) // finds the lowest number
+	{
+		if (array[stud][count] < lowest)
+		{
+			lowest = array[stud][count];
+		}
+	}
+	return lowest;
 }
