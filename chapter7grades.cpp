@@ -21,7 +21,7 @@ int choose();
 const int numofstudents = 5;
 const int numofgrades = 4;
 
-int main()
+int main() //
 {
 	int choice;
 	do {
@@ -29,7 +29,7 @@ int main()
 		char score[numofstudents];
 		string namesarray[numofstudents];
 		double grades[numofstudents][numofgrades];
-		for (int count = 0; count < numofstudents;count++)
+		for (int count = 0; count < numofstudents;count++) //assigns grades to the grades array that correspond with a student
 		{
 			cout << "please enter the name of student #" << count + 1 << endl;
 			namesarray[count] = getnames();
@@ -37,11 +37,11 @@ int main()
 			{
 				cout << "Please enter score #" << index + 1 << endl;
 				grades[count][index] = getgrades();
-				averages[count] += grades[count][index];
+				averages[count] += grades[count][index]; // calculate averages
 			}
 			averages[count] = averages[count] / numofgrades;
 		}
-		for (int count = 0; count < numofstudents; count++)
+		for (int count = 0; count < numofstudents; count++) // gets the letter grade
 		{
 			score[count] = getscore(averages, count);
 		}
@@ -49,24 +49,24 @@ int main()
 		choice = choose();
 	} while (choice == 1);
 }
-string getnames()
+string getnames() //gets names for the name array
 {
 	string name;
 	cin >> name;
 	return name;
 }
-double getgrades()
+double getgrades() //gets grades for the grades array
 {
 	double grade;
 	cin >> grade;
-	while (grade < 0 || grade>100)
+	while (grade < 0 || grade>100) //input validation
 	{
 		cout << "Unacceptable entry. Please enter a number between 1 and 100." << endl;
 		cin >> grade;
 	}
 	return grade;
 }
-char getscore(double averages[], int num)
+char getscore(double averages[], int num) //assigns a score to the averages of each student
 {
 	char score = 'E';
 	if (averages[num] > 90)
@@ -91,7 +91,7 @@ char getscore(double averages[], int num)
 	}
 	return score;
 }
-void displayresults(double averages[],int students,char grades[],string names[])
+void displayresults(double averages[],int students,char grades[],string names[]) //displays results
 {
 	cout << "Average Score / Letter Grade / Name" << endl;
 	cout << "******************************************" << endl;
@@ -100,12 +100,12 @@ void displayresults(double averages[],int students,char grades[],string names[])
 		cout << averages[count] <<"\t"<< grades[count] << "\t" << names[count] << endl;
 	}
 }
-int choose()
+int choose() //makes the program repeatable
 {
 	int choice;
 	cout << "Would you like to run the program again? ENTER 1 for yes or 2 for no." << endl;
 	cin >> choice;
-	while (choice < 1 || choice >2)
+	while (choice < 1 || choice >2) // input validation
 	{
 		cout << "Invalid selection. please select either 1 or 2." << endl;
 		cin >> choice;
